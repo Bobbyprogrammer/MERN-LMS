@@ -15,9 +15,12 @@ const app = express();
 await connectDB();
 await connectCloudinary();
 // Middlewares
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "https://mern-lms-client.vercel.app",
+  })
+);
 app.use(clerkMiddleware());
-
 // Routes
 app.get("/", (req, res) => res.send("API Working"));
 app.post("/clerk", express.json(), clerkWebhooks);
@@ -28,7 +31,6 @@ app.use("/api/user", express.json(), userRouter);
 
 // Port
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

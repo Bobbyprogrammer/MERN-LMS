@@ -4,18 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import humanizeDuration from "humanize-duration";
-
 export const AppContext = createContext();
-
 export const AppContextProvider = (props) => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
-
   const currency = import.meta.env.VITE_CURRENCY;
-
   const navigate = useNavigate();
   const { getToken } = useAuth();
   const { user } = useUser();
-
   const [showLogin, setShowLogin] = useState(false);
   const [isEducator, setIsEducator] = useState(false);
   const [allCourses, setAllCourses] = useState([]);
